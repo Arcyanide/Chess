@@ -4,7 +4,7 @@ public class Queen extends Pieces {
         super(color, x, y);
     }
     public String toString(){
-        if (getColor().equals("W")) {return "'R";}
-        else {return "R'";}
+        if (getColor().equals("W")) {return "Q";}
+        else {return "q";}
     }
 }

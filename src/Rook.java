@@ -6,9 +6,9 @@ public class Rook extends Pieces {
 
     public String toString() {
         if (getColor().equals("W")) {
-            return "'R";
+            return "R";
         } else {
-            return "R'";
+            return "r";
         }
     }
 }

@@ -4,35 +4,55 @@ public class Knight extends Pieces{
         super(color, x, y);
     }
 //Possible movement patterns for the Knight
-    int[][] directions = {
-            {2, 1}, {1, 2}, {-1, 2}, {-2, 1},
-            {-2, -1}, {-1, -2}, {1, -2}, {2, -1}
+    int[] directions1 = {
+-2,-1,1,2
+    };
+    int[] directions2 = {
+            -2,-1,1,2
     };
 
-    public boolean isValidMove (int newX, int newY) {
-        int rows = directions.length;
-        int cols = directions[0].length;
+    public boolean isValidMove (int oldX, int oldY, int newX, int newY) {
+        int rows = directions1.length;
+        int cols = directions2.length;
 //Loop cycles checking all the new x's & y's to the old ones to see if the move is valid
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if(getX()+directions[0][j] == newX && (getY()+directions[i][0] == newY)) {
+                if(oldX+directions1[j] == newX && (oldY+directions2[i] == newY)) {
                     //Checks if the function is inside the board
-                    if (newX > 0 && newX < 7 && newY > 0 && newY < 7) {
+//                    if (newX > 0 && newX < 7 && newY > 0 && newY < 7) {
+
                         return true;
-                    }
+//                    }
                 }
-                else {return false;}
+
+                }
 
             }
-        }
         return false;
-    }
-    public boolean move(int newX, int newY) {
-return false;
+        }
+
+
+    public Knight move(String Color, int newX, int newY) {
+      Knight nKnight = new Knight(Color, newX, newY);
+      return nKnight;
+//    Pieces[][] Temp = getBoard();
+//
+//
+//
+//    Temp[oldY][oldX] = new Empty(oldX, oldY);
+//    Temp[newY][newX] = new Knight(getColor(), newX, newY);
+//            System.out.println("Temp[0][0]");
+//
+//        setBoard(Temp);
+//    return Temp;
     }
 
+//    public Pieces[][] getTemp() {
+//        return Temp;
+//    }
+
     public String toString(){
-        if (getColor().equals("W")) {return "'N";}
-        else {return "N'";}
+        if (getColor().equals("W")) {return "N";}
+        else {return "n";}
     }
 }

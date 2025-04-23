@@ -4,7 +4,7 @@ public class King extends Pieces {
         super(color, x, y);
     }
     public String toString(){
-        if (getColor().equals("W")) {return "'Q";}
-        else {return "Q'";}
+        if (getColor().equals("W")) {return "K";}
+        else {return "k";}
     }
 }

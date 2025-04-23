@@ -5,7 +5,7 @@ public class Pawn extends Pieces {
     }
 
     public String toString(){
-        if (getColor().equals("W")) {return "'P";}
-        else {return "P'";}
+        if (getColor().equals("W")) {return "P";}
+        else {return "p";}
     }
 }

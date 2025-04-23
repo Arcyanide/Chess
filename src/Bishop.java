@@ -4,7 +4,7 @@ public class Bishop extends Pieces{
         super(color, x, y);
     }
     public String toString(){
-        if (getColor().equals("W")) {return "'B";}
-        else {return "B'";}
+        if (getColor().equals("W")) {return "B";}
+        else {return "b";}
     }
 }

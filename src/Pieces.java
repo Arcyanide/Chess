@@ -1,4 +1,4 @@
-public class Pieces {
+public class Pieces extends Board{
 
     private String color;
     private int x;
@@ -24,10 +24,10 @@ public int getX() {
 public int getY() {
         return y;
     }
-public boolean isValidMove() {
+public boolean isValidMove(int oldX, int oldY, int newX, int newY) {
         return false;
     }
-public void move() {
-
-    }
+public Pieces move(String Color, int newX, int newY) {
+    return null;
+}
 }

@@ -5,6 +5,7 @@ public class Game {
     static Scanner scanner = new Scanner(System.in);
     static Board board = new Board();
     int[] tempMove;
+    boolean valMove = true;
 
     public void startGame() {
 
@@ -29,7 +30,7 @@ public class Game {
     }
 
     //run everytime a turn starts, whether or not valid or invalid
-    public static void runTurn() {
+    public void runTurn() {
         for (int i = 0; i < 50; i++) {
             System.out.println("");
         }
@@ -46,12 +47,16 @@ public class Game {
         if (currentPlayer.equals("B")) {
             System.out.println("Black");
         }
+        if (!valMove) {System.out.println("Invalid move, please try again");}
         System.out.print("   Enter your move (Type your moves like A3B4) :");
 
         String CurrentMove = scanner.nextLine(); //gets input from player
 
-        getPiece(CurrentMove);
-
+        MakeMove(CurrentMove);
+        if (valMove) {
+            goNext();
+        }
+        runTurn();
 
     }
 
@@ -63,7 +68,7 @@ public class Game {
         //takes old x and old y
         //returns those put into board array for the piece
         Pieces[][] b = board.getBoard();
-        return b[coords[0]][coords[1]];
+        return b[coords[1]][coords[0]];
 
     }
 
@@ -74,7 +79,7 @@ public class Game {
         String x1raw = Rawmove.substring(0, 1);
         String x2raw = Rawmove.substring(2, 3);
         int x1 = Character.toLowerCase(x1raw.charAt(0)) - 'a'; //gpt'd this
-        int x2 = Character.toLowerCase(x1raw.charAt(0)) - 'a';
+        int x2 = Character.toLowerCase(x2raw.charAt(0)) - 'a';
 
         //extracts y's
         // - 1 to go from 1-8 to 0-7
@@ -106,4 +111,35 @@ public class Game {
         //    A3,B4
 
     }
-}
+
+//    public void invalidInput(){
+//        System.out.println("move was invalid, try again");
+//        runTurn();
+//    }
+
+    public void MakeMove(String Rawmove) {
+        Pieces[][] Temp = board.getBoard();
+        int[] coords = decodeMove(Rawmove);
+        if (getPiece(Rawmove).isValidMove(coords[0],coords[1], coords[2], coords[3])) {
+            if (Temp[coords[3]][coords[2]] instanceof Empty || !Temp[coords[3]][coords[2]].getColor().equals(currentPlayer)) {
+                valMove = true;
+                String cColor = getPiece(Rawmove).getColor();
+                Pieces nPiece = getPiece(Rawmove).move(getPiece(Rawmove).getColor(), coords[2], coords[3]);
+                Temp[coords[3]][coords[2]] = nPiece;
+                Temp[coords[1]][coords[0]] = new Empty("N", coords[2], coords[3]);
+
+
+                board.setBoard(Temp);
+                board.updateBoard();
+            }
+            else {valMove = false;}
+        }
+        else {valMove = false;}
+    }
+//        getPiece(Rawmove).move(coords[0], coords[1], coords[2], coords[3]);
+//        board.setBoard(Temp);
+//        System.out.println("ISSUE HERE");
+//        System.out.println(Temp[0][0]);
+    }
+
+
