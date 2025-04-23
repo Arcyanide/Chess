@@ -8,3 +8,4 @@ public class King extends Pieces {
         else {return "k";}
     }
 }
+

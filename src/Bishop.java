@@ -8,3 +8,4 @@ public class Bishop extends Pieces{
         else {return "b";}
     }
 }
+

@@ -41,3 +41,4 @@ Pieces [][] Temp = getBoard();
         return nPawn;
     }
 }
+

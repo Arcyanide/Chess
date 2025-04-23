@@ -56,3 +56,4 @@ public class Knight extends Pieces{
         else {return "n";}
     }
 }
+

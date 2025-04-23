@@ -31,3 +31,4 @@ public Pieces move(String Color, int newX, int newY) {
     return null;
 }
 }
+

@@ -8,3 +8,4 @@ public class Queen extends Pieces {
         else {return "q";}
     }
 }
+
