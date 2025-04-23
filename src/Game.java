@@ -121,7 +121,20 @@ public class Game {
         Pieces[][] Temp = board.getBoard();
         int[] coords = decodeMove(Rawmove);
         if (getPiece(Rawmove).isValidMove(coords[0],coords[1], coords[2], coords[3])) {
-            if (Temp[coords[3]][coords[2]] instanceof Empty || !Temp[coords[3]][coords[2]].getColor().equals(currentPlayer)) {
+            if (((Temp[coords[3]][coords[2]] instanceof Empty || !Temp[coords[3]][coords[2]].getColor().equals(currentPlayer)) && !(getPiece(Rawmove) instanceof Pawn)) || (getPiece(Rawmove) instanceof Pawn && coords[0] == coords[2])) {
+                System.out.println("TRIGGER 1");
+                valMove = true;
+                String cColor = getPiece(Rawmove).getColor();
+                Pieces nPiece = getPiece(Rawmove).move(getPiece(Rawmove).getColor(), coords[2], coords[3]);
+                Temp[coords[3]][coords[2]] = nPiece;
+                Temp[coords[1]][coords[0]] = new Empty("N", coords[2], coords[3]);
+
+
+                board.setBoard(Temp);
+                board.updateBoard();
+            }
+            else if (getPiece(Rawmove) instanceof Pawn && !(Temp[coords[3]][coords[2]] instanceof Empty)) {
+                System.out.println("TRIGGER 2");
                 valMove = true;
                 String cColor = getPiece(Rawmove).getColor();
                 Pieces nPiece = getPiece(Rawmove).move(getPiece(Rawmove).getColor(), coords[2], coords[3]);
@@ -133,13 +146,15 @@ public class Game {
                 board.updateBoard();
             }
             else {valMove = false;}
-        }
-        else {valMove = false;}
+            } else {
+                valMove = false;
+            }
+}
     }
 //        getPiece(Rawmove).move(coords[0], coords[1], coords[2], coords[3]);
 //        board.setBoard(Temp);
 //        System.out.println("ISSUE HERE");
 //        System.out.println(Temp[0][0]);
-    }
+
 
 
